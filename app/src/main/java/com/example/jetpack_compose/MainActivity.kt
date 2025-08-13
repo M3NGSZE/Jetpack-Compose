@@ -5,8 +5,15 @@ import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +50,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +69,43 @@ class MainActivity : ComponentActivity() {
 
 
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun InfiniteAnimationPreview() {
+    val infiniteTransition = rememberInfiniteTransition(label = "infiniteTransition")
+
+    val size by infiniteTransition.animateFloat(
+        initialValue = 50f,
+        targetValue = 150f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "sizeAnimation"
+    )
+
+    Box(
+        modifier = Modifier
+            .size(size.dp)
+            .background(Color.Blue)
+    )
+}
+
+//@Preview(showBackground = true)
+@Composable
+fun AnimatedBoxPreview() {
+    var big by remember { mutableStateOf(false) }
+    val size by animateDpAsState(if (big) 150.dp else 50.dp)
+
+    Box(
+        modifier = Modifier
+            .size(size)
+            .background(Color.Red)
+            .clickable() { big = !big }
+    )
 }
 
 //@Preview
