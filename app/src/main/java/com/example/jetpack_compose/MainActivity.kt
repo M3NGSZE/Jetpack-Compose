@@ -35,9 +35,12 @@ class MainActivity : ComponentActivity() {
 
 
     }
+}
 
-    @Composable
-    fun FirstUi(){
+
+
+@Composable
+fun FirstUi(){
 //        Row {
 //            Button(onClick = {}, Modifier.systemBarsPadding()) {
 //                Text(text = "Click Me 1")
@@ -62,28 +65,26 @@ class MainActivity : ComponentActivity() {
 //            }
 //        }
 
-        Row (modifier = Modifier.fillMaxSize().statusBarsPadding()) {
-            Button(onClick = {}) {
-                Text("Click Me 1")
-            }
-            Button(onClick = {}) {
-                Text("Click Me 2")
-            }
+    Row (modifier = Modifier.fillMaxSize().statusBarsPadding()) {
+        Button(onClick = {}) {
+            Text("Click Me 1")
         }
-
-        Column (
-            modifier = Modifier.fillMaxSize().statusBarsPadding(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(onClick = {}) {
-                Text("Click Me 3")
-            }
-            Button(onClick = {}) {
-                Text("Click Me 4")
-            }
+        Button(onClick = {}) {
+            Text("Click Me 2")
         }
     }
 
+    Column (
+        modifier = Modifier.fillMaxSize().statusBarsPadding(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = {}) {
+            Text("Click Me 3")
+        }
+        Button(onClick = {}) {
+            Text("Click Me 4")
+        }
+    }
 }
 
