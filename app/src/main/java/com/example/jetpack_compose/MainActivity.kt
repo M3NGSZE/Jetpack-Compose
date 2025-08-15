@@ -63,7 +63,8 @@ class MainActivity : ComponentActivity() {
 //                CounterPreview()
 //                RenderCard()
 //                ScoreCounter()
-//                RowCount()
+                RowCount()
+//                Remember()
 
             }
         }
@@ -72,7 +73,19 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview
+@Composable
+fun Remember(){
+    var num by remember {mutableStateOf(0)}
+    Button(
+        onClick = {num++},
+        Modifier.systemBarsPadding()
+    ) {
+        Text("Click Me: $num")
+    }
+}
+
+
+//@Preview
 @Composable
 fun SimpleComposable1( modifier: Modifier = Modifier) { Text("Hello World") }
 
@@ -93,11 +106,11 @@ fun RowCount(){
 
 @Composable
 fun ScoreCounter() {
-    var score by remember { mutableStateOf(0) }
+    var score = remember { mutableStateOf(0) }
 
     Column(modifier = Modifier.systemBarsPadding()) {
-        Text(text = "Score: $score")
-        Button(onClick = { score++ }) {
+        Text(text = "Score: ${score.value}")
+        Button(onClick = { score.value++ }) {
             Text("Increase")
         }
     }
